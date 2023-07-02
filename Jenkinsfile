@@ -42,7 +42,7 @@ node('kube-agent') {
                 sh "git config --global user.email 'medodeth666@gmail.com' "
                 sh "git config --global user.name 'moh-amer' "
                 //sh "sed -i 's/\\(version: \\).*/\\1 ${BUILD_NUMBER}/' deployment/values.yaml"
-                sh "sed -i 's/\\(image: docker\\.nexus\\.local\\.com\\/nodejs-app:\\).*/\\1 ${BUILD_NUMBER}/' deployment.yaml"
+                sh "sed -i 's/\\(image: docker\\.nexus\\.local\\.com\\/nodejs-app:\\).*/\\1${BUILD_NUMBER}/' deployment.yaml"
 
                 sh "git add . "
                 sh "git commit -m 'Editing TAG to ${BUILD_NUMBER}'"
