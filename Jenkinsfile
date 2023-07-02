@@ -1,22 +1,22 @@
 node('kube-agent') {
 
 
-        stage('CI : Build Image') {
-            container('kaniko') {
-                stage('Build and push to docker hub') {
+        // stage('CI : Build Image') {
+        //     container('kaniko') {
+        //         stage('Build and push to docker hub') {
                   
-                        script{
-                            sh '''
+        //                 script{
+        //                     sh '''
                             
-                            /kaniko/executor --git branch=k8s_task --context git://github.com/moh-amer/k8s_nodejs_app \
-                            --insecure --skip-tls-verify --destination nexus-service.tools.svc.cluster.local/nodejs-app:${BUILD_NUMBER}
+        //                     /kaniko/executor --git branch=k8s_task --context git://github.com/moh-amer/k8s_nodejs_app \
+        //                     --insecure --skip-tls-verify --destination nexus-service.tools.svc.cluster.local/nodejs-app:${BUILD_NUMBER}
                             
-                            '''
-                        }
+        //                     '''
+        //                 }
                     
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
 
                 
         stage("CI: Edit Configs Repo"){
@@ -38,6 +38,7 @@ node('kube-agent') {
         stage("Change Deployment Configs") {
             
                 //sh "git config --global --add safe.directory /home/jenkins/agent/workspace/mypipeline"
+                sh "git config --global --add safe.directory '/home/jenkins/agent/workspace/App Integration Pipeline'"
                 sh "git config --global user.email 'medodeth666@gmail.com' "
                 sh "git config --global user.name 'moh-amer' "
                 //sh "sed -i 's/\\(version: \\).*/\\1 ${BUILD_NUMBER}/' deployment/values.yaml"
