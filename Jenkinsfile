@@ -7,7 +7,7 @@ node('kube-agent') {
                   
                         script{
                             sh '''
-                            
+
                             /kaniko/executor --git branch=k8s_task --context git://github.com/moh-amer/k8s_nodejs_app \
                             --insecure --skip-tls-verify --destination nexus-service.tools.svc.cluster.local/nodejs-app:${BUILD_NUMBER}
                             
@@ -37,7 +37,7 @@ node('kube-agent') {
         
         stage("Change Deployment Configs") {
             
-                sh "git config --global --add safe.directory '/home/jenkins/agent/workspace/App Integration Pipeline'"
+                sh "git config --global --add safe.directory '/home/jenkins/agent/workspace/${env.JOB_BASE_NAME}'"
                 sh "git config --global user.email 'medodeth666@gmail.com' "
                 sh "git config --global user.name 'moh-amer' "
                 sh "sed -i 's/\\(image: docker\\.nexus\\.local\\.com\\/nodejs-app:\\).*/\\1${BUILD_NUMBER}/' deployment.yaml"
